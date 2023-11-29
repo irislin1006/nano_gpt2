@@ -11,6 +11,8 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
+from src.models.gpt2.tranformer_block import Block
+
 @dataclass
 class GPTConfig:
     vocab_size: int
