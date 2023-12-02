@@ -18,6 +18,7 @@ class GPTConfig:
     vocab_size: int
     block_size: int # max seqence length
     n_embed: int # embedding dimension
+    n_head: int # self attention head number
 
     n_layer: int # number of blocks/layers stacked
     dropout: float = 0.1
@@ -30,13 +31,13 @@ class GPT(nn.Module):
 
         self.config = config
 
-        self.transformer = nn.ModuleDict(dict([
+        self.transformer = nn.ModuleDict(dict(
             wte = nn.Embedding(config.vocab_size, config.n_embed), # Word Token Embeddings
             wpe = nn.Embedding(config.block_size, config.n_embed), # Word Position Embeddings
             drop = nn.Dropout(config.dropout), 
             h = nn.ModuleList([Block(config) for _ in range(config.n_layer)]), # multi-head attention
             ln_f = LayerNorm(config.n_embed, bias=config.bias)
-        ]))
+        ))
 
         self.lm_head = nn.Linear(config.n_embed, config.vocab_size)
 
