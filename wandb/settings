@@ -1,0 +1,5 @@
+[default]
+entity = irislin1006
+project = nano_gpt2
+base_url = https://api.wandb.ai
+

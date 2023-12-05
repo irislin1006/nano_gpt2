@@ -3,7 +3,7 @@ Transformer block
 """
 import math
 
-from src.models.gpt2.model import GPTConfig
+from src.models.gpt2.model_config import GPTConfig
 
 import torch
 import torch.nn as nn
@@ -107,7 +107,7 @@ class Block(nn.Module):
     def __init__(self, config: GPTConfig):
         super().__init__()
         self.ln_1 = LayerNorm(config.n_embed, config.bias)
-        self.attn = CasaulSelfAttention()
+        self.attn = CasaulSelfAttention(config)
         self.ln_2 = LayerNorm(config.n_embed, config.bias)
         self.mlp = MLP(config)
 
